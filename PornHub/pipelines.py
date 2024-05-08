@@ -6,7 +6,7 @@
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 import pymongo
-from items import PornVideoItem
+from PornHub.items import PornVideoItem
 
 
 class PornhubMongoDBPipeline(object):

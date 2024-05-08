@@ -29,9 +29,13 @@ class Spider(CrawlSpider):
 
     # test = True
     def start_requests(self):
+        proxy = 'http://192.168.5.117:7890'
+
         for ph_type in self.start_urls:
             yield Request(
-                url='https://www.pornhub.com/%s' % ph_type, callback=self.parse_ph_key
+                url='https://www.pornhub.com/%s' % ph_type,
+                callback=self.parse_ph_key,
+                meta={'proxy': proxy},
             )
 
     def parse_ph_key(self, response):
@@ -60,8 +64,7 @@ class Spider(CrawlSpider):
         phItem = PornVideoItem()
         selector = Selector(response)
         _ph_info = re.findall('flashvars_.*?=(.*?);\n', selector.extract())
-        logging.debug('PH信息的JSON:')
-        logging.debug(_ph_info)
+        logging.debug(f'PH信息的JSON:{_ph_info}')
         _ph_info_json = json.loads(_ph_info[0])
         duration = _ph_info_json.get('video_duration')
         phItem['video_duration'] = duration

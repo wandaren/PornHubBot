@@ -1,6 +1,6 @@
 # encoding=utf-8
 import random
-from user_agents import agents
+from PornHub.user_agents import agents
 import json
 
 
