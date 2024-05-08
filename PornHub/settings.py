@@ -21,7 +21,7 @@ CONCURRENT_REQUESTS = 20  # 默认为16
 # CONCURRENT_REQUESTS_PER_IP = 1
 REDIRECT_ENABLED = False
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'pornhub (+http://www.yourdomain.com)'
+# USER_AGENT = 'pornhub (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True

@@ -1,8 +1,3 @@
-关注我的公众号：DeveloperPython 收到实时的项目动态。
-
-
-> 声明：本项目旨在学习Scrapy爬虫框架和MongoDB数据库，不可使用于商业和个人其他意图。若使用不当，均由个人承担。
-
 * 项目主要是爬取全球最大成人网站PornHub的视频标题、时长、mp4链接、封面URL和具体的PornHub链接
 * 项目爬的是PornHub.com，结构简单，速度飞快
 * 爬取PornHub视频的速度可以达到500万/天以上。具体视个人网络情况,因为我是家庭网络，所以相对慢一点。
@@ -36,8 +31,8 @@
 * python PornHub/quickstart.py
 
 ## 运行截图
-![](https://github.com/xiyouMc/PornHubBot/blob/master/img/running.png?raw=true)
-![](https://github.com/xiyouMc/PornHubBot/blob/master/img/mongodb.png?raw=true)
+![]()
+![]()
 
 ## 数据库说明
 
