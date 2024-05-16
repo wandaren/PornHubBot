@@ -29,7 +29,7 @@ class Spider(CrawlSpider):
 
     # test = True
     def start_requests(self):
-        proxy = 'http://192.168.5.117:7890'
+        proxy = 'http://192.168.2.128:7890'
 
         for ph_type in self.start_urls:
             yield Request(
@@ -63,27 +63,22 @@ class Spider(CrawlSpider):
     def parse_ph_info(self, response):
         phItem = PornVideoItem()
         selector = Selector(response)
-        _ph_info = re.findall('flashvars_.*?=(.*?);\n', selector.extract())
-        logging.debug(f'PH信息的JSON:{_ph_info}')
-        _ph_info_json = json.loads(_ph_info[0])
-        duration = _ph_info_json.get('video_duration')
-        phItem['video_duration'] = duration
-        title = _ph_info_json.get('video_title')
-        phItem['video_title'] = title
-        image_url = _ph_info_json.get('image_url')
-        phItem['image_url'] = image_url
-        link_url = _ph_info_json.get('link_url')
-        phItem['link_url'] = link_url
-        quality_480p = _ph_info_json.get('quality_480p')
-        phItem['quality_480p'] = quality_480p
-        logging.info(
-            'duration:'
-            + duration
-            + ' title:'
-            + title
-            + ' image_url:'
-            + image_url
-            + ' link_url:'
-            + link_url
-        )
-        yield phItem
+        _ph_info = re.findall('var flashvars = (.*),"video_id"', selector.extract())
+        if len(_ph_info) > 0:
+            _ph_info = _ph_info[0] + '}'
+            logging.debug(f'PH信息的JSON:{_ph_info}')
+            _ph_info_json = json.loads(_ph_info)
+            duration = _ph_info_json.get('video_duration')
+            phItem['video_duration'] = duration
+            title = _ph_info_json.get('video_title')
+            phItem['video_title'] = title
+            image_url = _ph_info_json.get('image_url')
+            phItem['image_url'] = image_url
+            link_url = _ph_info_json.get('link_url')
+            phItem['link_url'] = link_url
+            quality_480p = _ph_info_json.get('quality_480p')
+            phItem['quality_480p'] = quality_480p
+            logging.info(
+                f'duration: {duration} title: {title} image_url: {image_url} link_url: {link_url}'
+            )
+            yield phItem

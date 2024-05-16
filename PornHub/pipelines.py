@@ -21,10 +21,10 @@ class PornhubMongoDBPipeline(object):
     def process_item(self, item, spider):
         print('MongoDBItem', item)
         """ 判断类型 存入MongoDB """
-        if isinstance(item, PornVideoItem):
+        if isinstance(item, PornVideoItem) and item['link_url'] is not None:
             print('PornVideoItem True')
             try:
-                self.PhRes.insert(dict(item))
-            except Exception:
-                pass
+                self.PhRes.insert_one(dict(item))
+            except Exception as e:
+                print("发生异常：", str(e))
         return item
